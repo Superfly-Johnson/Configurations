@@ -13,6 +13,7 @@
 - [[#networking][Networking]]
 - [[#region-and-locale][Region and locale]]
 - [[#gui-configuration][GUI Configuration]]
+- [[#services][Services]]
   - [[#audio][Audio]]
   - [[#emacs][Emacs]]
   - [[#flatpak][Flatpak]]
@@ -88,6 +89,7 @@ This section contains everything related to the region and locale.
   services.xserver.desktopManager.plasma5.enable = true;
 #+END_SRC
 
+* Services
 This section is reserved for the various daemons I use on my linux systems.
 ** Audio
 
@@ -124,15 +126,15 @@ I use flatpak as a third party repository for proprietary applications, for inst
 ** Syncthing
 I use syncthing to synchronize, among other things, my passwords. This creates the syncthing user and enables the daemon for that user.
 #+BEGIN_SRC nix
-services = {
-    syncthing = {
-        enable = true;
-        dataDir = "/srv/syncthing/Sync";    # Default folder for new synced folders
-        configDir = "/srv/syncthing/.config/syncthing";   # Folder for Syncthing's settings and keys
-    };
-};
+  services = {
+      syncthing = {
+	  enable = true;
+          user = "superfly";
+	  dataDir = "/home/superfly/Sync";    # Default folder for new synced folders
+	  configDir = "/home/superfly/.config/syncthing";   # Folder for Syncthing's settings and keys
+      };
+  };
 #+END_SRC
-
 * User accounts
 This section is reserved for user accounts.
 

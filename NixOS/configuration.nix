@@ -21,8 +21,6 @@ networking.useDHCP = false;
 networking.interfaces.enp0s25.useDHCP = true;
 networking.interfaces.wlp3s0.useDHCP = true;
 
-programs.ssh.startAgent = true;
-
 time.timeZone = "America/Montreal";
 i18n.defaultLocale = "fr_CA.UTF-8";
 
@@ -55,9 +53,10 @@ security.rtkit.enable = true;
 
 services = {
     syncthing = {
-        enable = true;
-        dataDir = "/srv/syncthing/Sync";    # Default folder for new synced folders
-        configDir = "/srv/syncthing/.config/syncthing";   # Folder for Syncthing's settings and keys
+	enable = true;
+        user = "superfly";
+	dataDir = "/home/superfly/Sync";    # Default folder for new synced folders
+	configDir = "/home/superfly/.config/syncthing";   # Folder for Syncthing's settings and keys
     };
 };
 
