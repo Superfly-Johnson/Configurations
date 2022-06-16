@@ -1,0 +1,193 @@
+#+TITLE: Superfly's NixOS configuration
+#+AUTHOR: Superfly Johnson
+#+DESCRIPTION: Superfly's personal NixOS configuration
+#+STARTUP: showeverything
+#+PROPERTY: header-args :tangle configuration.nix
+#+NAME: configuration.nix
+#+auto_tangle: t
+
+* TABLE OF CONTENTS :TOC_2:
+- [[#dependencies][Dependencies]]
+- [[#hardware-configuration][Hardware configuration]]
+- [[#boot][Boot]]
+- [[#networking][Networking]]
+- [[#region-and-locale][Region and locale]]
+- [[#gui-configuration][GUI Configuration]]
+  - [[#audio][Audio]]
+  - [[#emacs][Emacs]]
+  - [[#flatpak][Flatpak]]
+  - [[#security][Security]]
+  - [[#syncthing][Syncthing]]
+- [[#user-accounts][User accounts]]
+  - [[#private-accounts][Private accounts]]
+- [[#system-packages][System packages]]
+- [[#state-version][State version]]
+- [[#install-script][Install script]]
+
+* Dependencies                                               
+#+BEGIN_SRC nix
+  { config, pkgs, callPackage, ... }:
+
+  {
+#+END_SRC
+
+* Hardware configuration
+Do NOT modify the hardware configuration
+
+#+BEGIN_SRC nix 
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ];
+#+END_SRC
+
+* Boot
+This section contains everything related to the boot process that is
+not hardware specific
+
+#+BEGIN_SRC nix
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+#+END_SRC
+
+* Networking 
+This section contains everything related to the network configuration.
+I decided to go with networkmanager as it doesn't need an additional
+DHCPCD to run and integrates well with most desktop environments.
+#+BEGIN_SRC nix
+    networking.hostName = "superfly-t550-nixos"; 
+    networking.networkmanager.enable = true;
+
+    # The global useDHCP flag is deprecated, therefore explicitly set to false here.
+    # Per-interface useDHCP will be mandatory in the future, so this generated config
+    # replicates the default behaviour.
+    networking.useDHCP = false;
+    networking.interfaces.enp0s25.useDHCP = true;
+    networking.interfaces.wlp3s0.useDHCP = true;
+#+END_SRC
+
+* Region and locale
+This section contains everything related to the region and locale.
+#+BEGIN_SRC nix
+    time.timeZone = "America/Montreal";
+    i18n.defaultLocale = "fr_CA.UTF-8";
+
+    i18n.extraLocaleSettings = 
+    {
+	LC_MESSAGES = "en_US.UTF-8";
+    };
+#+END_SRC
+
+* GUI Configuration
+#+BEGIN_SRC nix
+# Enable X11
+  services.xserver.enable = true;
+  # Enable the Plasma 5 Desktop Environment.
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
+#+END_SRC
+
+This section is reserved for the various daemons I use on my linux systems.
+** Audio
+
+I like to use pipewire for my audio setup. It's a more streamlined, universal interface for linux audio and by far the best out there.
+#+BEGIN_SRC nix
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      pulse.enable = true;
+      jack.enable = true;
+    };
+#+END_SRC
+
+** Emacs
+
+I enabled the emacs daemon here as I often hop in and out of emacs to edit files.
+#+BEGIN_SRC nix
+    services.emacs.enable = true;
+#+END_SRC
+** Flatpak
+I use flatpak as a third party repository for proprietary applications, for instance Discord. 
+#+BEGIN_SRC nix
+    # Enable Flatpak
+    services.flatpak.enable = true;
+    xdg.portal.enable = true;
+#+END_SRC
+
+** Security
+#+BEGIN_SRC nix
+    security.polkit.enable = true;
+    security.rtkit.enable = true;
+#+END_SRC
+
+** Syncthing
+I use syncthing to synchronize, among other things, my passwords. This creates the syncthing user and enables the daemon for that user.
+#+BEGIN_SRC nix
+services = {
+    syncthing = {
+        enable = true;
+        dataDir = "/srv/syncthing/Sync";    # Default folder for new synced folders
+        configDir = "/srv/syncthing/.config/syncthing";   # Folder for Syncthing's settings and keys
+    };
+};
+#+END_SRC
+
+* User accounts
+This section is reserved for user accounts.
+
+** Private accounts
+#+BEGIN_SRC nix
+users.users.superfly = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "syncthing" ]; 
+};
+#+END_SRC
+
+* System packages
+#+BEGIN_SRC nix
+  environment.systemPackages = with pkgs; [
+    wget
+    git
+    rsync
+    emacs
+    libreoffice
+    firefox
+    keepassxc
+    gnupg
+    barrier
+  ];
+
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+    }))
+  ];
+#+END_SRC
+
+* State version
+References to the initial version that was installed. 
+#+BEGIN_SRC nix
+    system.stateVersion = "21.11"; 
+  }
+#+END_SRC
+
+* Install script
+To install the software, simply run 
+#+BEGIN_EXAMPLE sh
+sudo ./install.sh
+#+END_EXAMPLE
+in the terminal, or
+#+BEGIN_EXAMPLE sh
+./install.sh
+#+END_EXAMPLE
+as root user. 
+
+#+BEGIN_SRC sh :tangle install.sh :shebang "#!/bin/sh" :tangle-mode (identity #o755)
+  for i in ./*.nix; do
+  echo "Copying ${i} to /etc/nixos..."
+  cp ${i} /etc/nixos/
+  echo "Switching Nix' configuration..."
+  nixos-rebuild switch
+  done
+#+END_SRC
