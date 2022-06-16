@@ -1,0 +1,102 @@
+#+Title: Superfly's GNU Emacs config
+#+AUTHOR: Superfly Johnson
+#+DESCRIPTION: Superfly's personal Emacs config.
+#+STARTUP: showeverything
+
+* TABLE OF CONTENTS                                                   :TOC_2:
+- [[#important-put-this-in-your-initel][IMPORTANT: Put this in your init.el]]
+- [[#requirements][Requirements]]
+  - [[#package-archives][Package Archives]]
+  - [[#use-package][Use-Package]]
+- [[#theming][Theming]]
+- [[#org-mode][Org-mode]]
+  - [[#tables-of-content][Tables of Content]]
+- [[#customization][Customization]]
+  - [[#evil-mode][EVIL mode]]
+  - [[#evil-org-mode][EVIL org-mode]]
+  - [[#electricicity][Electricicity]]
+- [[#additional-code-modes][Additional Code Modes]]
+  - [[#nix-mode][Nix-Mode]]
+
+* IMPORTANT: Put this in your init.el
+#+BEGIN_EXAMPLE
+(org-babel-load-file
+ (expand-file-name
+  "config.org"
+  user-emacs-directory))
+#+END_EXAMPLE
+
+* Requirements
+The configuration has some dependencies. This section is dedicated to that.
+
+** Package Archives
+This adds MELPA to our package archives
+
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  (package-initialize)
+#+END_SRC
+
+** Use-Package
+We use "use-package" to set depdencies and configure modules more easily. ":ensure t" globally makes it so that packages within "use-package" keywords are automatically installed if they are missing.
+
+#+BEGIN_SRC emacs-lisp
+  (unless (package-installed-p 'use-package)
+    (package-install 'use-package))
+  (setq use-package-always-ensure t)
+#+END_SRC
+
+
+* Theming
+#+BEGIN_SRC emacs-lisp
+#+END_SRC
+
+* Org-mode
+** Tables of Content
+I use toc-org to automatically generate tables of content in Emacs org-mode.
+#+BEGIN_SRC emacs-lisp
+(use-package toc-org
+  :ensure t
+  :after org
+  :hook (org-mode . toc-org-mode)
+)
+#+END_SRC
+* Customization
+This section is dedicated to the changes of how emacs behaves
+** EVIL mode
+EVIL is an extensible 'vi' emulation for emacs. Vi keybinds are universal and are generally useful when ssh-ing into remote machines, so I use them within my .emacs file so I do not forget them.
+
+#+BEGIN_SRC emacs-lisp
+(use-package evil
+	:init
+    (evil-mode))
+#+END_SRC
+
+** EVIL org-mode
+Supplemental evil-mode key-bindings to Emacs org-mode.
+#+BEGIN_SRC emacs-lisp
+(use-package evil-org
+  :ensure t
+  :after org
+  :hook (org-mode . evil-org-mode))
+#+END_SRC
+
+** Electricicity
+*** Electric pair
+#+BEGIN_SRC emacs-lisp
+(electric-pair-mode 1)
+#+END_SRC
+*** Electric indent
+#+BEGIN_SRC
+(electric-indent-mode 0)
+#+END_SRC
+
+* Additional Code Modes
+This section is reserved for syntactical modes that emacs doesn't contain by default.
+
+** Nix-Mode
+#+BEGIN_SRC emacs-lisp
+(use-package nix-mode
+  :mode "\\.nix\\'")
+#+END_SRC
