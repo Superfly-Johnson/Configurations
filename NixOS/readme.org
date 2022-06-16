@@ -173,15 +173,10 @@ References to the initial version that was installed.
 #+END_SRC
 
 * Install script
-To install the software, simply run 
+To install the software, simply run in the terminal
 #+BEGIN_EXAMPLE sh
 sudo ./install.sh
 #+END_EXAMPLE
-in the terminal, or
-#+BEGIN_EXAMPLE sh
-./install.sh
-#+END_EXAMPLE
-as root user. 
 
 #+BEGIN_SRC sh :tangle install.sh :shebang "#!/bin/sh" :tangle-mode (identity #o755)
   for i in ./*.nix; do
