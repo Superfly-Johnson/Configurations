@@ -1,0 +1,9 @@
+#+TITLE: Superfly's NixOS configuration
+#+AUTHOR: Superfly Johnson
+#+DESCRIPTION: Superfly's personal NixOS configuration
+#+STARTUP: showeverything
+#+PROPERTY: header-args :tangle configuration.nix
+#+NAME: configuration.nix
+#+auto_tangle: t
+
+This repository is dedicated to my personal configurations of various tools.
