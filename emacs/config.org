@@ -8,6 +8,7 @@
 - [[#requirements][Requirements]]
   - [[#package-archives][Package Archives]]
   - [[#use-package][Use-Package]]
+- [[#installation][Installation]]
 - [[#theming][Theming]]
 - [[#org-mode][Org-mode]]
   - [[#tables-of-content][Tables of Content]]
@@ -47,6 +48,14 @@ We use "use-package" to set depdencies and configure modules more easily. ":ensu
   (unless (package-installed-p 'use-package)
     (package-install 'use-package))
   (setq use-package-always-ensure t)
+#+END_SRC
+
+* Installation
+To install the new configuration, simply execute ./install.sh.
+TODO: Add init.el to the installation script.
+#+BEGIN_SRC sh :tangle install.sh :shebang "#!/bin/sh" :tangle-mode (identity #o700)
+  echo "Copying config.org to '${HOME}/.emacs.d/config.org'..."
+  cp ./config.org ${HOME}/.emacs.d/config.org
 #+END_SRC
 
 * Theming
