@@ -12,6 +12,7 @@
 - [[#theming][Theming]]
 - [[#org-mode][Org-mode]]
   - [[#tables-of-content][Tables of Content]]
+  - [[#auto-tangle][Auto-Tangle]]
 - [[#customization][Customization]]
   - [[#evil-mode][EVIL mode]]
   - [[#evil-org-mode][EVIL org-mode]]
@@ -70,6 +71,15 @@ I use toc-org to automatically generate tables of content in Emacs org-mode.
   :ensure t
   :after org
   :hook (org-mode . toc-org-mode)
+)
+#+END_SRC
+** Auto-Tangle
+#+BEGIN_SRC emacs-lisp
+(use-package org-auto-tangle
+  :ensure t
+  :after org
+  :defer t
+  :hook (org-mode . org-auto-tangle-mode)
 )
 #+END_SRC
 * Customization
