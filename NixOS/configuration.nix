@@ -75,6 +75,7 @@ environment.systemPackages = with pkgs; [
   keepassxc
   gnupg
   barrier
+  python
 ];
 
 nixpkgs.overlays = [
