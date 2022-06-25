@@ -23,12 +23,12 @@
   - [[#magit][Magit]]
 
 * IMPORTANT: Put this in your init.el
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC emacs-lisp :tangle init.el
 (org-babel-load-file
  (expand-file-name
   "config.org"
   user-emacs-directory))
-#+END_EXAMPLE
+#+END_SRC
 
 * Requirements
 The configuration has some dependencies. This section is dedicated to that.
@@ -56,6 +56,12 @@ To install the new configuration, simply execute ./install.sh.
 TODO: Add init.el to the installation script.
 #+BEGIN_SRC sh :tangle install.sh :shebang "#!/bin/sh" :tangle-mode (identity #o700)
   echo "Copying config.org to '${HOME}/.emacs.d/config.org'..."
+  if [[ -d "$HOME/.emacs.d" ]]
+  then
+    echo "$HOME/.emacs.d doesn't exist. Creating it..."
+    mkdir "$HOME/.emacs.d"
+  fi
+  cp ./init.el ${HOME}/.emacs.d/init.el
   cp ./config.org ${HOME}/.emacs.d/config.org
 #+END_SRC
 
