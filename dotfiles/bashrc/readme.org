@@ -1,0 +1,31 @@
+#+TITLE: Superfly's bashrc configuration
+#+AUTHOR: Superfly Johnson
+#+DESCRIPTION: Superfly's personal bashrc configuration
+#+STARTUP: showeverything
+#+PROPERTY: header-args :tangle .bashrc :shebang "!/bin/bash" (identity #o755)
+#+NAME: bashrc.sh
+#+auto_tangle: t
+
+* Description
+This is my personal bashrc.
+
+** SSH
+This automatically starts the SSH-agent in a known, non-standard directory in order for me to be able to use it with keepassxc.
+#+BEGIN_SRC bash :tangle .bashrc.d/ssh.sh :shebang "!/bin/bash"
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+if [[ ! "$SSH_AUTH_SOCK" ]]; then
+    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+fi
+#+END_SRC 
+
+* Install
+#+BEGIN_SRC shell :tangle ./install.sh :shebang "!/bin/sh" (identity #o755)
+  if [[ -d "$HOME/.bashrc.d" ]]
+  then
+    echo "$HOME/.bashrc.d doesn't exist. Creating it..."
+    mkdir "$HOME/.bashrc.d"
+  fi
+
+#+END_SRC
