@@ -99,16 +99,16 @@ EVIL is an extensible 'vi' emulation for emacs. Vi keybinds are universal and ar
     (evil-mode))
 #+END_SRC
 
-** EVIL org-mode
-Supplemental evil-mode key-bindings to Emacs org-mode.
+*** EVIL collection
+EVIL collection is a collection of contributed packages that evil-ify various emacs packages.
 #+BEGIN_SRC emacs-lisp
-(use-package evil-org
-  :ensure t
-  :after org
-  :hook (org-mode . evil-org-mode))
+  (use-package evil-collection
+    :after evil
+    :ensure t
+    :config
+    (evil-collection-init))
 #+END_SRC
-
-** Electricicity
+** [#B] Electricicity
 *** Electric pair
 #+BEGIN_SRC emacs-lisp
 (electric-pair-mode 1)
