@@ -1,9 +1,7 @@
-#+TITLE: Superfly's NixOS configuration
+#+TITLE: Superfly's configurations
 #+AUTHOR: Superfly Johnson
-#+DESCRIPTION: Superfly's personal NixOS configuration
+#+DESCRIPTION: Superfly's personal configurations
 #+STARTUP: showeverything
-#+PROPERTY: header-args :tangle configuration.nix
-#+NAME: configuration.nix
-#+auto_tangle: t
 
-This repository is dedicated to my personal configurations of various tools.
+* Description
+This repository is dedicated to my personal configurations of various tools. Everything here is licensed under the BSD0 license, you may do whatever you want with the files contained within, just don't sue me.
