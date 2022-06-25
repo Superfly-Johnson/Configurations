@@ -1,0 +1,14 @@
+#+TITLE: Superfly's NixOS configuration
+#+AUTHOR: Superfly Johnson
+#+DESCRIPTION: Superfly's personal NixOS configuration
+#+STARTUP: showeverything
+#+PROPERTY: header-args :tangle packages.sh :shebang "!/bin/bash" (identity #o755)
+#+NAME: packages.sh
+#+auto_tangle: t
+
+* Description
+This file is dedicated to common programs I use when on arch systems that may not be installed out of the box. Run the script as superuser.
+
+#+BEGIN_SRC shell 
+pacman -S emacs syncthing git openssh
+#+END_SRC
