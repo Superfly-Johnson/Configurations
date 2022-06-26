@@ -22,6 +22,7 @@
   - [[#electricicity][Electricicity]]
 - [[#additional-code-modes][Additional Code Modes]]
   - [[#nix-mode][Nix-Mode]]
+  - [[#systemd-mode][SystemD-Mode]]
 
 * Description
 This is my personal GNU Emacs configuration. It comes with a little install script that I use when installing on a new machine.
@@ -142,3 +143,9 @@ This section is reserved for syntactical modes that emacs doesn't contain by def
   :mode "\\.nix\\'")
 #+END_SRC
 
+
+** SystemD-Mode
+#+BEGIN_SRC emacs-lisp
+(use-package systemd
+  :ensure t)
+#+END_SRC
