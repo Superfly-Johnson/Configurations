@@ -20,6 +20,7 @@
 - [[#customization][Customization]]
   - [[#evil-mode][EVIL mode]]
   - [[#electricicity][Electricicity]]
+  - [[#hooks][Hooks]]
 - [[#additional-code-modes][Additional Code Modes]]
   - [[#nix-mode][Nix-Mode]]
   - [[#systemd-mode][SystemD-Mode]]
@@ -105,7 +106,6 @@ Magit is a git integration within emacs.
 This section is dedicated to the changes of how emacs behaves
 ** EVIL mode
 EVIL is an extensible 'vi' emulation for emacs. Vi keybinds are universal and are generally useful when ssh-ing into remote machines, so I use them within my .emacs file so I do not forget them.
-
 #+BEGIN_SRC emacs-lisp
 (use-package evil
   :init
@@ -113,7 +113,6 @@ EVIL is an extensible 'vi' emulation for emacs. Vi keybinds are universal and ar
   (evil-mode)
   )
 #+END_SRC
-
 *** EVIL collection
 EVIL collection is a collection of contributed packages that evil-ify various emacs packages.
 #+BEGIN_SRC emacs-lisp
@@ -128,21 +127,19 @@ EVIL collection is a collection of contributed packages that evil-ify various em
 #+BEGIN_SRC emacs-lisp
 (electric-pair-mode 1)
 #+END_SRC
-*** Electric indent
-#+BEGIN_SRC
-(electric-indent-mode 0)
+** Hooks
+THese hooks are largely meant to make emacs work consistentyly across various file types.
+*** Org-mode hook
+#+BEGIN_SRC emacs-lisp
+(add-hook 'text-mode-hook (setq electric-pair-mode nil))
 #+END_SRC
-
 * Additional Code Modes
 This section is reserved for syntactical modes that emacs doesn't contain by default.
-
 ** Nix-Mode
 #+BEGIN_SRC emacs-lisp
 (use-package nix-mode
   :mode "\\.nix\\'")
 #+END_SRC
-
-
 ** SystemD-Mode
 #+BEGIN_SRC emacs-lisp
 (use-package systemd

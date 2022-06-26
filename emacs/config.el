@@ -38,6 +38,8 @@
 
 (electric-pair-mode 1)
 
+(add-hook 'text-mode-hook (setq electric-pair-mode nil))
+
 (use-package nix-mode
   :mode "\\.nix\\'")
 
