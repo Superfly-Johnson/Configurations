@@ -5,29 +5,47 @@
 #+auto_tangle: t
 
 * TABLE OF CONTENTS                                                   :TOC_2:
+- [[#description][Description]]
 - [[#important-put-this-in-your-initel][IMPORTANT: Put this in your init.el]]
+- [[#installation][Installation]]
 - [[#requirements][Requirements]]
   - [[#package-archives][Package Archives]]
   - [[#use-package][Use-Package]]
-- [[#installation][Installation]]
 - [[#theming][Theming]]
 - [[#org-mode][Org-mode]]
   - [[#tables-of-content][Tables of Content]]
   - [[#auto-tangle][Auto-Tangle]]
+- [[#miscellaneous][Miscellaneous]]
+  - [[#magit][Magit]]
 - [[#customization][Customization]]
   - [[#evil-mode][EVIL mode]]
   - [[#electricicity][Electricicity]]
 - [[#additional-code-modes][Additional Code Modes]]
   - [[#nix-mode][Nix-Mode]]
-- [[#miscellaneous][Miscellaneous]]
-  - [[#magit][Magit]]
 
+* Description
+This is my personal GNU Emacs configuration. It comes with a little install script that I use when installing on a new machine.
 * IMPORTANT: Put this in your init.el
 #+BEGIN_SRC emacs-lisp :tangle init.el
 (org-babel-load-file
  (expand-file-name
   "config.org"
   user-emacs-directory))
+#+END_SRC
+
+* Installation
+To install the new configuration, simply execute ./install.sh.
+#+BEGIN_SRC sh :tangle install.sh :shebang "#!/bin/sh" :tangle-mode (identity #o700)
+  EMACSDIR="$HOME/.emacs.d"
+  if [[ ! -d ${EMACSDIR} ]]
+  then
+    echo "${EMACSDIR} doesn't exist. Creating it..."
+    mkdir ${EMACSDIR}
+  fi
+  for f in init.el config.org; 
+    do echo "Copying ${f} to ${EMACSDIR}/${f}";
+    cp -pf ${f} $EMACSDIR/${f};
+  done
 #+END_SRC
 
 * Requirements
@@ -51,22 +69,8 @@ We use "use-package" to set depdencies and configure modules more easily. ":ensu
   (setq use-package-always-ensure t)
 #+END_SRC
 
-* Installation
-To install the new configuration, simply execute ./install.sh.
-#+BEGIN_SRC sh :tangle install.sh :shebang "#!/bin/sh" :tangle-mode (identity #o700)
-  EMACSDIR="$HOME/.emacs.d"
-  if [[ ! -d ${EMACSDIR} ]]
-  then
-    echo "${EMACSDIR} doesn't exist. Creating it..."
-    mkdir ${EMACSDIR}
-  fi
-  for f in init.el config.org; 
-    do echo "Copying ${f} to ${EMACSDIR}/${f}";
-    cp -pf ${f} $EMACSDIR/${f};
-  done
-#+END_SRC
-
 * Theming
+This section is reserved for theming, if we ever add some.
 #+BEGIN_SRC emacs-lisp
 #+END_SRC
 
