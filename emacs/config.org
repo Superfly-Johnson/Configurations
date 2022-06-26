@@ -107,8 +107,11 @@ EVIL is an extensible 'vi' emulation for emacs. Vi keybinds are universal and ar
 
 #+BEGIN_SRC emacs-lisp
 (use-package evil
-	:init
-    (evil-mode))
+  :init
+  (evil-mode)
+  :config
+  (setq evil-want-keybinding nil)
+  )
 #+END_SRC
 
 *** EVIL collection
