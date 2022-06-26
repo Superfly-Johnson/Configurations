@@ -1,9 +1,11 @@
 #!/bin/sh
-echo "Copying config.org to '${HOME}/.emacs.d/config.org'..."
-if [[ ! -d "$HOME/.emacs.d" ]]
+EMACSDIR="$HOME/.emacs.d"
+if [[ ! -d ${EMACSDIR} ]]
 then
-  echo "$HOME/.emacs.d doesn't exist. Creating it..."
-  mkdir "$HOME/.emacs.d"
+  echo "${EMACSDIR} doesn't exist. Creating it..."
+  mkdir ${EMACSDIR}
 fi
-cp ./init.el ${HOME}/.emacs.d/init.el
-cp ./config.org ${HOME}/.emacs.d/config.org
+for f in init.el config.org; 
+  do echo "Copying ${f} to ${EMACSDIR}/${f}";
+  cp -pf ${f} $EMACSDIR/${f};
+done

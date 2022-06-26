@@ -53,16 +53,17 @@ We use "use-package" to set depdencies and configure modules more easily. ":ensu
 
 * Installation
 To install the new configuration, simply execute ./install.sh.
-TODO: Add init.el to the installation script.
 #+BEGIN_SRC sh :tangle install.sh :shebang "#!/bin/sh" :tangle-mode (identity #o700)
-  echo "Copying config.org to '${HOME}/.emacs.d/config.org'..."
-  if [[ ! -d "$HOME/.emacs.d" ]]
+  EMACSDIR="$HOME/.emacs.d"
+  if [[ ! -d ${EMACSDIR} ]]
   then
-    echo "$HOME/.emacs.d doesn't exist. Creating it..."
-    mkdir "$HOME/.emacs.d"
+    echo "${EMACSDIR} doesn't exist. Creating it..."
+    mkdir ${EMACSDIR}
   fi
-  cp ./init.el ${HOME}/.emacs.d/init.el
-  cp ./config.org ${HOME}/.emacs.d/config.org
+  for f in init.el config.org; 
+    do echo "Copying ${f} to ${EMACSDIR}/${f}";
+    cp -pf ${f} $EMACSDIR/${f};
+  done
 #+END_SRC
 
 * Theming
