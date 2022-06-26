@@ -1,0 +1,20 @@
+#+TITLE: Superfly's Arch postinstall script/ 
+#+AUTHOR: Superfly Johnson
+#+DESCRIPTION: Superfly's arch-linux post install scrip.t
+#+STARTUP: showeverything
+#+PROPERTY: header-args :tangle install.sh :shebang "!/bin/sh" (identity #o755)
+#+NAME: packages.sh
+#+auto_tangle: t
+
+* Description
+This file is dedicated to common programs I use when on arch systems that may not be installed out of the box. Run the script as superuser.
+
+#+BEGIN_SRC shell 
+  pacman -S emacs syncthing git openssh
+  pacman -S nix
+  systemctl enable nix-daemon.service
+  echo "allowed-users = superfly" >> /etc/nix/nix.conf
+  nix-channel --add https://nixos.org/channels/nixpkgs-unstable
+  nix-channel --update 
+  nix-env --upgrade
+#+END_SRC
