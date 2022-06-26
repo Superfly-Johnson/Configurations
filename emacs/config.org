@@ -2,6 +2,7 @@
 #+AUTHOR: Superfly Johnson
 #+DESCRIPTION: Superfly's personal Emacs config.
 #+STARTUP: showeverything
+#+auto_tangle: t
 
 * TABLE OF CONTENTS                                                   :TOC_2:
 - [[#important-put-this-in-your-initel][IMPORTANT: Put this in your init.el]]
@@ -15,7 +16,6 @@
   - [[#auto-tangle][Auto-Tangle]]
 - [[#customization][Customization]]
   - [[#evil-mode][EVIL mode]]
-  - [[#evil-org-mode][EVIL org-mode]]
   - [[#electricicity][Electricicity]]
 - [[#additional-code-modes][Additional Code Modes]]
   - [[#nix-mode][Nix-Mode]]
