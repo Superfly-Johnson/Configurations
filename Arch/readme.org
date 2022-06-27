@@ -9,6 +9,8 @@
 * Description
 This file is dedicated to common programs I use when on arch systems that may not be installed out of the box. Run the script as superuser.
 
+* Post-installation
+This script needs to be run as root. It simply installs Nix and a couple other tools I use daily.
 #+BEGIN_SRC shell 
   pacman -S emacs syncthing git openssh
   pacman -S nix
@@ -17,4 +19,13 @@ This file is dedicated to common programs I use when on arch systems that may no
   nix-channel --add https://nixos.org/channels/nixpkgs-unstable
   nix-channel --update 
   nix-env --upgrade
+#+END_SRC
+
+* User configuration
+This script is meant to be run as my main user account. IMPORTANT NOTE: Run this script ONLY once as it appends variable to .bashrc.
+#+BEGIN_SRC shell :tangle user-install.sh :shebang "!/bin/sh" (identity #o755)
+  nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home
+  nix-channel --update
+  echo "export NIX_PATH=$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}" >> $HOME/.bashrc
+  nix-shell '<home-manager>' -A install
 #+END_SRC

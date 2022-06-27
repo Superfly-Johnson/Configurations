@@ -1,4 +1,4 @@
-!/bin/bash
+!/bin/sh
 pacman -S emacs syncthing git openssh
 pacman -S nix
 systemctl enable nix-daemon.service
