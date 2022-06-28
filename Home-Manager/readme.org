@@ -1,0 +1,36 @@
+#+TITLE: Superfly's Home-Manager's configuration
+#+AUTHOR: Superfly Johnson
+#+DESCRIPTION: Superfly's personal home-manager's configuration. 
+#+STARTUP: showeverything
+#+PROPERTY: header-args :tangle "~/.config/nixpkgs/home.nix"
+#+auto_tangle: t
+
+* Table of Contents                                                   :TOC_2:
+
+* Description                                                        
+I decided to attempt using Nix's Home-Manager instead of dotfiles to manage my configuration files.
+
+* User Information
+This section is reserved to my home user information's
+#+begin_src nix
+{
+  home.username = "superfly";
+  home.homeDirectory = "/home/superfly";
+#+end_src
+
+* State Version
+#+begin_src nix
+  home.stateVersion = "22.11"; 
+#+end_src
+
+* Programs
+This section is reserved for programs that will be managed by
+#+begin_src nix 
+  programs.git = {
+    enable = true;
+    userName = "Superfly Johnson";
+    userEmail = "superfly.johnson@outlook.com";
+  };
+  programs.home-manager.enable = true;
+}
+#+end_src
