@@ -13,6 +13,7 @@ This file is dedicated to common programs I use when on arch systems that may no
 This script needs to be run as root. It simply installs Nix and a couple other tools I use daily.
 #+BEGIN_SRC shell 
   pacman -S emacs syncthing git openssh
+  pacman -S bash
   pacman -S nix
   systemctl enable nix-daemon.service
   echo "allowed-users = superfly" >> /etc/nix/nix.conf
@@ -24,6 +25,7 @@ This script needs to be run as root. It simply installs Nix and a couple other t
 * User configuration
 This script is meant to be run as my main user account. IMPORTANT NOTE: Run this script ONLY once as it appends variable to .bashrc.
 #+BEGIN_SRC shell :tangle user-install.sh :shebang "!/bin/sh" (identity #o755)
+  chsh -s /bin/bash
   nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
   nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home
   nix-channel --update

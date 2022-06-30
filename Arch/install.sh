@@ -1,5 +1,6 @@
 !/bin/sh
 pacman -S emacs syncthing git openssh
+pacman -S bash
 pacman -S nix
 systemctl enable nix-daemon.service
 echo "allowed-users = superfly" >> /etc/nix/nix.conf
