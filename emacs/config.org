@@ -152,3 +152,11 @@ This mode is used for pug (previously known as jade) templates.
   (use-package jade-mode
   :ensure t)
 #+end_src
+
+
+** Powershell-Mode
+This is a mode for powershell on Microsoft Windows.
+#+begin_src 
+  (use-package powershell 
+  :ensure t)
+#+end_src
