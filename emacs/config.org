@@ -145,3 +145,10 @@ This section is reserved for syntactical modes that emacs doesn't contain by def
 (use-package systemd
   :ensure t)
 #+END_SRC
+
+** Pug-Mode
+This mode is used for pug (previously known as jade) templates.
+#+begin_src emacs-lisp
+  (use-package jade-mode
+  :ensure t)
+#+end_src
