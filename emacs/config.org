@@ -74,6 +74,9 @@ We use "use-package" to set depdencies and configure modules more easily. ":ensu
 * Theming
 This section is reserved for theming, if we ever add some.
 #+BEGIN_SRC emacs-lisp
+(if (eq system-type 'windows-nt)
+  (set-face-attribute 'default nil :family "Consolas" :height 110)
+)
 #+END_SRC
 
 * Org-mode
