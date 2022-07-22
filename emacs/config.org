@@ -39,7 +39,7 @@ This is my personal GNU Emacs configuration. It comes with a little install scri
 To install the new configuration, simply execute ./install.sh.
 #+BEGIN_SRC sh :tangle install.sh :shebang "#!/bin/sh" :tangle-mode (identity #o700)
   EMACSDIR="$HOME/.emacs.d"
-  if [[ ! -d ${EMACSDIR} ]]
+  if [ ! -d ${EMACSDIR} ]
   then
     echo "${EMACSDIR} doesn't exist. Creating it..."
     mkdir ${EMACSDIR}

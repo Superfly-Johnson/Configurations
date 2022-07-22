@@ -1,6 +1,6 @@
 #!/bin/sh
 EMACSDIR="$HOME/.emacs.d"
-if [[ ! -d ${EMACSDIR} ]]
+if [ ! -d ${EMACSDIR} ]
 then
   echo "${EMACSDIR} doesn't exist. Creating it..."
   mkdir ${EMACSDIR}
