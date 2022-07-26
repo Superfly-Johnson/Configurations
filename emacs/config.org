@@ -142,6 +142,13 @@ These hooks are largely meant to make emacs work consistentyly across various fi
 #+BEGIN_SRC emacs-lisp
 (add-hook 'text-mode-hook (setq electric-indent-mode nil))
 #+END_SRC
+*** Javascript-mode hook
+This sets the javascript tab size to 2 within javascript-mode.
+#+begin_src emacs-lisp
+(add-hook 'javascript-mode-hook '(lambda()(
+    setq indent-tabs-mode t tab-width 2 js-indent-level 2)
+))
+#+end_src
 * Additional Code Modes
 This section is reserved for syntactical modes that emacs doesn't contain by default.
 ** Nix-Mode
