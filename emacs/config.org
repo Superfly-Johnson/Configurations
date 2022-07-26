@@ -130,8 +130,14 @@ EVIL collection is a collection of contributed packages that evil-ify various em
 #+BEGIN_SRC emacs-lisp
 (electric-pair-mode 1)
 #+END_SRC
+** Tabulation
+#+begin_src emacs-lisp
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq indent-line-function 'insert-tab)
+#+end_src
 ** Hooks
-THese hooks are largely meant to make emacs work consistentyly across various file types.
+These hooks are largely meant to make emacs work consistentyly across various file types.
 *** Org-mode hook
 #+BEGIN_SRC emacs-lisp
 (add-hook 'text-mode-hook (setq electric-indent-mode nil))
