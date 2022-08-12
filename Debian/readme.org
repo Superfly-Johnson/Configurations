@@ -1,0 +1,49 @@
+#+TITLE: Superfly's NixOS configuration
+#+AUTHOR: Superfly Johnson
+#+DESCRIPTION: Superfly's personal NixOS configuration
+#+STARTUP: showeverything
+#+PROPERTY: header-args :tangle install.sh :shebang "#!/bin/sh" :tangle-mode (identity #o700)
+#+NAME: install.sh
+#+auto_tangle: t
+
+* Installation
+Simply execute ./install.sh as superuser after having done a plain debian installation.
+
+* Extra repositories
+** Syncthing
+#+begin_src sh
+wget -O /usr/share/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg
+echo "deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable" | sudo tee /etc/apt/sources.list.d/syncthing.list
+#+end_src
+
+* Update package repository
+#+begin_src 
+apt update
+apt upgrade
+#+end_src
+
+* Extra packages
+** Emacs
+#+begin_src 
+apt install emacs
+#+end_src
+
+** Syncthing
+#+begin_src 
+apt install syncthing
+#+end_src
+
+** Flatpak
+I only install plasma-discover-backend-flatpak instead of the flatpak package as flatpak is already pinned as a dependency here. I use flatpaks for certain proprietary applications, namely Discord, Microsoft Teams and Zoom as well as to get more updated versions of certain applications I use, namely MuseScore.
+#+begin_src 
+apt install plasma-discover-backend-flatpak
+#+end_src
+
+** Nix
+I like experimenting with Nix for container deployment, though I do not feel it is quite stable enough yet to do full deployments with.
+#+begin_src 
+apt install nix
+#+end_src
+
+* TODO
+Add support for enabling user services
