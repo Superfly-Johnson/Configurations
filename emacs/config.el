@@ -13,14 +13,13 @@
 (use-package toc-org
   :ensure t
   :after org
-  :hook (org-mode . toc-org-mode)
+  :hook (org-mode-hook . toc-org-mode)
 )
 
 (use-package org-auto-tangle
   :ensure t
   :after org
-  :defer t
-  :hook (org-mode . org-auto-tangle-mode)
+  :hook (org-mode-hook . org-auto-tangle-mode)
 )
 
 (use-package magit
@@ -40,7 +39,15 @@
 
 (electric-pair-mode 1)
 
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq indent-line-function 'insert-tab)
+
 (add-hook 'text-mode-hook (setq electric-indent-mode nil))
+
+(add-hook 'javascript-mode-hook '(lambda()(
+    setq indent-tabs-mode t tab-width 2 js-indent-level 2)
+))
 
 (use-package nix-mode
   :mode "\\.nix\\'")

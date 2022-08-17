@@ -8,6 +8,8 @@
 - [[#description][Description]]
 - [[#important-put-this-in-your-initel][IMPORTANT: Put this in your init.el]]
 - [[#installation][Installation]]
+  - [[#linux][Linux]]
+  - [[#windows][Windows]]
 - [[#requirements][Requirements]]
   - [[#package-archives][Package Archives]]
   - [[#use-package][Use-Package]]
@@ -20,10 +22,13 @@
 - [[#customization][Customization]]
   - [[#evil-mode][EVIL mode]]
   - [[#electricicity][Electricicity]]
+  - [[#tabulation][Tabulation]]
   - [[#hooks][Hooks]]
 - [[#additional-code-modes][Additional Code Modes]]
   - [[#nix-mode][Nix-Mode]]
   - [[#systemd-mode][SystemD-Mode]]
+  - [[#pug-mode][Pug-Mode]]
+  - [[#powershell-mode][Powershell-Mode]]
 
 * Description
 This is my personal GNU Emacs configuration. It comes with a little install script that I use when installing on a new machine.
@@ -97,7 +102,7 @@ I use toc-org to automatically generate tables of content in Emacs org-mode.
 (use-package toc-org
   :ensure t
   :after org
-  :hook (org-mode . toc-org-mode)
+  :hook (org-mode-hook . toc-org-mode)
 )
 #+END_SRC
 ** Auto-Tangle
@@ -105,8 +110,7 @@ I use toc-org to automatically generate tables of content in Emacs org-mode.
 (use-package org-auto-tangle
   :ensure t
   :after org
-  :defer t
-  :hook (org-mode . org-auto-tangle-mode)
+  :hook (org-mode-hook . org-auto-tangle-mode)
 )
 #+END_SRC
 * Miscellaneous
