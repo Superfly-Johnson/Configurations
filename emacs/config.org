@@ -126,10 +126,10 @@ This section is dedicated to the changes of how emacs behaves
 EVIL is an extensible 'vi' emulation for emacs. Vi keybinds are universal and are generally useful when ssh-ing into remote machines, so I use them within my .emacs file so I do not forget them.
 #+BEGIN_SRC emacs-lisp
 (use-package evil
-  :init
-  (setq evil-want-keybinding nil)
-  (evil-mode)
-  )
+    :init
+    (setq evil-want-keybinding nil)
+    (evil-mode)
+)
 #+END_SRC
 *** EVIL collection
 EVIL collection is a collection of contributed packages that evil-ify various emacs packages.
@@ -152,11 +152,6 @@ EVIL collection is a collection of contributed packages that evil-ify various em
 (setq indent-line-function 'insert-tab)
 #+end_src
 ** Hooks
-These hooks are largely meant to make emacs work consistentyly across various file types.
-*** Org-mode hook
-#+BEGIN_SRC emacs-lisp
-(add-hook 'text-mode-hook (setq electric-indent-mode nil))
-#+END_SRC
 *** Javascript-mode hook
 This sets the javascript tab size to 2 within javascript-mode.
 #+begin_src emacs-lisp

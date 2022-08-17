@@ -43,8 +43,6 @@
 (setq-default tab-width 4)
 (setq indent-line-function 'insert-tab)
 
-(add-hook 'text-mode-hook (setq electric-indent-mode nil))
-
 (add-hook 'javascript-mode-hook '(lambda()(
     setq indent-tabs-mode t tab-width 2 js-indent-level 2)
 ))
