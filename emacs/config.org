@@ -36,6 +36,7 @@ This is my personal GNU Emacs configuration. It comes with a little install scri
 #+END_SRC
 
 * Installation
+** Linux
 To install the new configuration, simply execute ./install.sh.
 #+BEGIN_SRC sh :tangle install.sh :shebang "#!/bin/sh" :tangle-mode (identity #o700)
   EMACSDIR="$HOME/.emacs.d"
@@ -49,7 +50,17 @@ To install the new configuration, simply execute ./install.sh.
     cp -pf ${f} $EMACSDIR/${f};
   done
 #+END_SRC
-
+** Windows
+ #+begin_src ps :tangle install.ps1
+if (-not (Get-Item $env:appdata/.emacs.d)){
+  Write-Host "Configuration directory doesn't exist, creating it..."
+  New-Item -Path "$env:appdata/.emacs.d" -ItemType directory
+}
+foreach ($i in @("init.el","config.org")){
+  Write-Host "Copying $i to $env:appdata/.emacs.d"
+  Copy-Item $i "$env:appdata/.emacs.d"
+}
+ #+end_src
 * Requirements
 The configuration has some dependencies. This section is dedicated to that.
 
