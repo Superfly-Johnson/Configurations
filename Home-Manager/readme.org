@@ -9,7 +9,6 @@
 
 * Description                                                        
 I decided to attempt using Nix's Home-Manager instead of dotfiles to manage my configuration files.
-
 * User Information
 This section is reserved to my home user information's
 #+begin_src nix
@@ -17,20 +16,34 @@ This section is reserved to my home user information's
   home.username = "superfly";
   home.homeDirectory = "/home/superfly";
 #+end_src
-
 * State Version
 #+begin_src nix
-  home.stateVersion = "22.11"; 
+  home.stateVersion = "22.05"; 
 #+end_src
-
 * Programs
 This section is reserved for programs that will be managed by
-#+begin_src nix 
-  programs.git = {
+** Firefox
+#+begin_src nix
+  programs.firefox.enable = true;
+#+end_src
+** Nix
+#+begin_src nix
+    programs.git = {
     enable = true;
     userName = "Superfly Johnson";
     userEmail = "superfly.johnson@outlook.com";
-  };
-  programs.home-manager.enable = true;
+};
+#+end_src
+** Syncthing
+#+begin_src nix
+  services.syncthing.enable = true;
+#+end_src
+** Emacs
+#+begin_src nix
+programs.emacs.enable = true;
+#+end_src
+* End
+#+begin_src nix
+    programs.home-manager.enable = true;
 }
 #+end_src
