@@ -7,33 +7,45 @@ imports =
     ./hardware-configuration.nix
   ];
 
-# Use the systemd-boot EFI boot loader.
+# Allow unfree packages
+nixpkgs.config.allowUnfree = true;
+
+services.xserver.videoDrivers = [ "nvidia" ];
+hardware.opengl.enable = true;
+hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+# Bootloader.
 boot.loader.systemd-boot.enable = true;
 boot.loader.efi.canTouchEfiVariables = true;
+boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
-networking.hostName = "superfly-t550-nixos"; 
+# Setup keyfile
+boot.initrd.secrets = {
+  "/crypto_keyfile.bin" = null;
+};
+
+# Enable swap on luks
+boot.initrd.luks.devices."luks-feba7f47-5c04-4c44-85d4-bc84b0e6296e".device = "/dev/disk/by-uuid/feba7f47-5c04-4c44-85d4-bc84b0e6296e";
+boot.initrd.luks.devices."luks-feba7f47-5c04-4c44-85d4-bc84b0e6296e".keyFile = "/crypto_keyfile.bin";
+
+networking.hostName = "GameTop"; 
 networking.networkmanager.enable = true;
-
-# The global useDHCP flag is deprecated, therefore explicitly set to false here.
-# Per-interface useDHCP will be mandatory in the future, so this generated config
-# replicates the default behaviour.
-networking.useDHCP = false;
-networking.interfaces.enp0s25.useDHCP = true;
-networking.interfaces.wlp3s0.useDHCP = true;
 
 time.timeZone = "America/Montreal";
 i18n.defaultLocale = "fr_CA.UTF-8";
 
 i18n.extraLocaleSettings = 
 {
-    LC_MESSAGES = "en_US.UTF-8";
+LC_MESSAGES = "en_US.UTF-8";
 };
 
-# Enable X11
-  services.xserver.enable = true;
-  # Enable the Plasma 5 Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+services.xserver.enable = true;
+
+services.xserver.displayManager.sddm.enable = true;
+services.xserver.displayManager.autoLogin.enable = true;
+services.xserver.displayManager.autoLogin.user = "superfly";
+
+services.xserver.desktopManager.plasma5.enable = true;
 
 services.pipewire = {
   enable = true;
@@ -42,8 +54,6 @@ services.pipewire = {
   jack.enable = true;
 };
 
-services.emacs.enable = true;
-
 # Enable Flatpak
 services.flatpak.enable = true;
 xdg.portal.enable = true;
@@ -51,38 +61,15 @@ xdg.portal.enable = true;
 security.polkit.enable = true;
 security.rtkit.enable = true;
 
-services = {
-    syncthing = {
-	enable = true;
-        user = "superfly";
-	dataDir = "/home/superfly/Sync";    # Default folder for new synced folders
-	configDir = "/home/superfly/.config/syncthing";   # Folder for Syncthing's settings and keys
-    };
-};
-
 users.users.superfly = {
     isNormalUser = true;
     extraGroups = [ "wheel" "syncthing" ]; 
 };
 
+nix.allowedUsers = [ "superfly" ];
+
 environment.systemPackages = with pkgs; [
-  wget
-  git
-  rsync
-  emacs
-  libreoffice
-  firefox
-  keepassxc
-  gnupg
-  barrier
-  python
 ];
 
-nixpkgs.overlays = [
-  (import (builtins.fetchTarball {
-    url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-  }))
-];
-
-system.stateVersion = "21.11"; 
+system.stateVersion = "22.04"; 
 }
