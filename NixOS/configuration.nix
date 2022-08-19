@@ -68,8 +68,9 @@ users.users.superfly = {
 
 nix.allowedUsers = [ "superfly" ];
 
-environment.systemPackages = with pkgs; [
-];
+programs.ssh = {
+  startAgent = true;
+};
 
 system.stateVersion = "22.04"; 
 }

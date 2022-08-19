@@ -105,7 +105,6 @@ This section contains everything related to the region and locale.
 * Services
 This section is reserved for the various daemons I use on my linux systems.
 ** Audio
-
 I like to use pipewire for my audio setup. It's a more streamlined, universal interface for linux audio and by far the best out there.
 #+BEGIN_SRC nix
     services.pipewire = {
@@ -115,7 +114,6 @@ I like to use pipewire for my audio setup. It's a more streamlined, universal in
       jack.enable = true;
     };
 #+END_SRC
-
 ** Flatpak
 I use flatpak as a third party repository for proprietary applications, for instance Discord. 
 #+BEGIN_SRC nix
@@ -123,17 +121,13 @@ I use flatpak as a third party repository for proprietary applications, for inst
     services.flatpak.enable = true;
     xdg.portal.enable = true;
 #+END_SRC
-
 ** Security
 #+BEGIN_SRC nix
     security.polkit.enable = true;
     security.rtkit.enable = true;
 #+END_SRC
-
-#+END_SRC
 * User accounts
 This section is reserved for user accounts.
-
 ** Private accounts
 #+BEGIN_SRC nix
   users.users.superfly = {
@@ -148,18 +142,18 @@ These users are allowed to run nix commands without being root
  nix.allowedUsers = [ "superfly" ];
 #+end_src
 * System packages
+** SSH
 #+BEGIN_SRC nix
-  environment.systemPackages = with pkgs; [
-  ];
+  programs.ssh = {
+    startAgent = true;
+  };
 #+END_SRC
-
 * State version
 References to the initial version that was installed. 
 #+BEGIN_SRC nix
     system.stateVersion = "22.04"; 
   }
 #+END_SRC
-
 * Install script
 To install the software, simply run in the terminal
 #+BEGIN_EXAMPLE sh
