@@ -34,16 +34,18 @@ This section is reserved for programs that will be managed by
     userEmail = "superfly.johnson@outlook.com";
 };
 #+end_src
-** Syncthing
-#+begin_src nix
-  services.syncthing.enable = true;
-#+end_src
 ** Emacs
 #+begin_src nix
 programs.emacs.enable = true;
+#+end_src
+* Services
+** Syncthing
+#+begin_src nix
+  services.syncthing.enable = true;
 #+end_src
 * End
 #+begin_src nix
     programs.home-manager.enable = true;
 }
 #+end_src
+
