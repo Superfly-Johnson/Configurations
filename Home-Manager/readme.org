@@ -15,6 +15,7 @@
   - [[#emacs][Emacs]]
 - [[#services][Services]]
   - [[#syncthing][Syncthing]]
+- [[#xdg][XDG]]
 - [[#install-script][Install script]]
 - [[#end][End]]
 
@@ -35,7 +36,7 @@ This section is reserved to my home user information's
 This section is reserved for programs that will be managed by
 ** Nix
 #+begin_src nix
-    programs.git = {
+  programs.git = {
     enable = true;
     userName = "Superfly Johnson";
     userEmail = "superfly.johnson@outlook.com";
@@ -49,6 +50,11 @@ programs.emacs.enable = true;
 ** Syncthing
 #+begin_src nix
   services.syncthing.enable = true;
+#+end_src
+* XDG
+This section is dedicated to XDG-related configurations.
+#+begin_src nix
+  xdg.enable = true;
 #+end_src
 * Install script
 To install the configuration, simply run in the terminal
