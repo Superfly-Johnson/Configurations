@@ -2,10 +2,22 @@
 #+AUTHOR: Superfly Johnson
 #+DESCRIPTION: Superfly's personal home-manager's configuration. 
 #+STARTUP: showeverything
-#+PROPERTY: header-args :tangle "~/.config/nixpkgs/home.nix"
+#+PROPERTY: header-args :tangle home.nix
+#+NAME: home.nix
 #+auto_tangle: t
 
 * Table of Contents                                                   :TOC_2:
+- [[#description][Description]]
+- [[#user-information][User Information]]
+- [[#state-version][State Version]]
+- [[#programs][Programs]]
+  - [[#firefox][Firefox]]
+  - [[#nix][Nix]]
+  - [[#emacs][Emacs]]
+- [[#services][Services]]
+  - [[#syncthing][Syncthing]]
+- [[#install-script][Install script]]
+- [[#end][End]]
 
 * Description                                                        
 I decided to attempt using Nix's Home-Manager instead of dotfiles to manage my configuration files.
@@ -43,6 +55,20 @@ programs.emacs.enable = true;
 #+begin_src nix
   services.syncthing.enable = true;
 #+end_src
+* Install script
+To install the configuration, simply run in the terminal
+#+BEGIN_EXAMPLE sh
+sudo ./install.sh
+#+END_EXAMPLE
+
+#+BEGIN_SRC sh :tangle install.sh :shebang "#!/bin/sh" :tangle-mode (identity #o755)
+  for i in *.nix; do
+    echo "Copying $i to $HOME/.config/nixpkgs/$i"
+    cp ${i} "$HOME/.config/nixpkgs/$i"
+    echo "Switching Home-Manager's configuration..."
+    home-manager switch
+  done
+#+END_SRC
 * End
 #+begin_src nix
     programs.home-manager.enable = true;
