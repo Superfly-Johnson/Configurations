@@ -102,7 +102,7 @@ I use toc-org to automatically generate tables of content in Emacs org-mode.
 (use-package toc-org
   :ensure t
   :after org
-  :hook (org-mode-hook . toc-org-mode)
+  :hook (org-mode toc-org-mode)
 )
 #+END_SRC
 ** Auto-Tangle
@@ -110,7 +110,7 @@ I use toc-org to automatically generate tables of content in Emacs org-mode.
 (use-package org-auto-tangle
   :ensure t
   :after org
-  :hook (org-mode-hook . org-auto-tangle-mode)
+  :hook (org-mode org-auto-tangle-mode)
 )
 #+END_SRC
 * Miscellaneous
