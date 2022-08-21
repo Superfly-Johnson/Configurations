@@ -11,7 +11,6 @@
 - [[#user-information][User Information]]
 - [[#state-version][State Version]]
 - [[#programs][Programs]]
-  - [[#firefox][Firefox]]
   - [[#nix][Nix]]
   - [[#emacs][Emacs]]
 - [[#services][Services]]
@@ -34,10 +33,6 @@ This section is reserved to my home user information's
 #+end_src
 * Programs
 This section is reserved for programs that will be managed by
-** Firefox
-#+begin_src nix
-  programs.firefox.enable = true;
-#+end_src
 ** Nix
 #+begin_src nix
     programs.git = {

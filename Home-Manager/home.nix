@@ -4,8 +4,6 @@
 
 home.stateVersion = "22.05";
 
-programs.firefox.enable = true;
-
 programs.git = {
     enable = true;
     userName = "Superfly Johnson";
