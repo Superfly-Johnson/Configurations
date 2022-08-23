@@ -1,3 +1,11 @@
+{options, config, lib, pkgs, ... }:
+
+with lib;
+
+let home = "${config.home.homeDirectory}";
+
+in
+
 {
   home.username = "superfly";
   home.homeDirectory = "/home/superfly";
@@ -19,8 +27,6 @@ client.enable = true;
 defaultEditor = true;
 socketActivation.enable = true;
 };
-
-xdg.enable = true;
 
 programs.home-manager.enable = true;
 }

@@ -8,19 +8,29 @@
 
 * Table of Contents                                                   :TOC_2:
 - [[#description][Description]]
+- [[#dependencies][Dependencies]]
 - [[#user-information][User Information]]
 - [[#state-version][State Version]]
 - [[#programs][Programs]]
-  - [[#nix][Nix]]
+  - [[#git][Git]]
 - [[#services][Services]]
   - [[#syncthing][Syncthing]]
   - [[#emacs][Emacs]]
-- [[#xdg][XDG]]
 - [[#install-script][Install script]]
 - [[#end][End]]
 
 * Description                                                        
 I decided to attempt using Nix's Home-Manager instead of dotfiles to manage my configuration files.
+* Dependencies
+#+begin_src nix
+  {options, config, lib, pkgs, ... }:
+
+  with lib;
+  
+  let home = "${config.home.homeDirectory}";
+
+  in
+#+end_src
 * User Information
 This section is reserved to my home user information's
 #+begin_src nix
@@ -34,7 +44,7 @@ This section is reserved to my home user information's
 #+end_src
 * Programs
 This section is reserved for programs that will be managed by
-** Nix
+** Git
 #+begin_src nix
   programs.git = {
     enable = true;
@@ -57,11 +67,6 @@ This section is reserved for programs that will be managed by
   socketActivation.enable = true;
   };
 #+end_src
-* XDG
-This section is dedicated to XDG-related configurations.
-#+begin_src nix
-  xdg.enable = true;
-#+end_src
 * Install script
 To install the configuration, simply run in the terminal
 #+BEGIN_EXAMPLE sh
@@ -69,12 +74,31 @@ sudo ./install.sh
 #+END_EXAMPLE
 
 #+BEGIN_SRC sh :tangle install.sh :shebang "#!/bin/sh" :tangle-mode (identity #o755)
+  PROFILEDIR="$HOME/.profile.d"
   for i in *.nix; do
     echo "Copying $i to $HOME/.config/nixpkgs/$i"
     cp ${i} "$HOME/.config/nixpkgs/$i"
     echo "Switching Home-Manager's configuration..."
     home-manager switch
   done
+  if [ ! -d ${PROFILEDIR} ]
+  then
+    echo "${PROFILEDIR} doesn't exist. Creating it..."
+    mkdir ${PROFILEDIR}
+  fi
+  echo "Copying env-vars.sh to $PROFILEDIR..."
+  cp "./env-vars.sh" $PROFILEDIR
+  if ! grep -e "for i in \$HOME\/\.profile\.d" $HOME/.profile ; then
+    echo 'Sourcing of files in $HOME/.profile.d/ is not set. Setting it...'
+    echo '# Sourcing files under $HOME/.profile.d/
+for i in $HOME/.profile.d/*; do
+    source $i
+done' >> $HOME/.profile
+  fi
+#+END_SRC
+#+BEGIN_SRC sh :tangle env-vars.sh :shebang "#!/bin/sh"
+  source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+  export XDG_DATA_DIRS="${XDG_DATA_DIRS};$HOME/.nix-profile/share/applications/"
 #+END_SRC
 * End
 #+begin_src nix
