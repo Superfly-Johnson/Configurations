@@ -12,9 +12,9 @@
 - [[#state-version][State Version]]
 - [[#programs][Programs]]
   - [[#nix][Nix]]
-  - [[#emacs][Emacs]]
 - [[#services][Services]]
   - [[#syncthing][Syncthing]]
+  - [[#emacs][Emacs]]
 - [[#xdg][XDG]]
 - [[#install-script][Install script]]
 - [[#end][End]]
@@ -42,14 +42,20 @@ This section is reserved for programs that will be managed by
     userEmail = "superfly.johnson@outlook.com";
 };
 #+end_src
-** Emacs
-#+begin_src nix
-programs.emacs.enable = true;
-#+end_src
 * Services
 ** Syncthing
 #+begin_src nix
   services.syncthing.enable = true;
+#+end_src
+** Emacs
+#+begin_src nix
+  programs.emacs.enable = true;
+  services.emacs = {
+  enable = true;
+  client.enable = true;
+  defaultEditor = true;
+  socketActivation.enable = true;
+  };
 #+end_src
 * XDG
 This section is dedicated to XDG-related configurations.

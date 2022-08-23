@@ -10,9 +10,15 @@ programs.git = {
     userEmail = "superfly.johnson@outlook.com";
 };
 
-programs.emacs.enable = true;
-
 services.syncthing.enable = true;
+
+programs.emacs.enable = true;
+services.emacs = {
+enable = true;
+client.enable = true;
+defaultEditor = true;
+socketActivation.enable = true;
+};
 
 xdg.enable = true;
 
