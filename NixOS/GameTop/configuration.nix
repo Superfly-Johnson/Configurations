@@ -114,6 +114,10 @@
 
   # List services that you want to enable:
 
+  # Flatpak
+  services.flatpak.enable = true;
+  xdg.portal.enable = true;
+
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
