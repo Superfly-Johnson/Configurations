@@ -59,7 +59,6 @@ This section is reserved for programs that will be managed by
 #+end_src
 ** Emacs
 #+begin_src nix
-  programs.emacs.enable = true;
   services.emacs = {
   enable = true;
   client.enable = true;

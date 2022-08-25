@@ -20,7 +20,6 @@ programs.git = {
 
 services.syncthing.enable = true;
 
-programs.emacs.enable = true;
 services.emacs = {
 enable = true;
 client.enable = true;
