@@ -1,11 +1,5 @@
 {options, config, lib, pkgs, ... }:
 
-with lib;
-
-let home = "${config.home.homeDirectory}";
-
-in
-
 {
   home.username = "superfly";
   home.homeDirectory = "/home/superfly";
@@ -17,6 +11,10 @@ programs.git = {
     userName = "Superfly Johnson";
     userEmail = "superfly.johnson@outlook.com";
 };
+
+home.packages = [
+  pkgs.libreoffice
+];
 
 services.syncthing.enable = true;
 
