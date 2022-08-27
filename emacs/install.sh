@@ -6,6 +6,6 @@ then
   mkdir ${EMACSDIR}
 fi
 for f in init.el config.org; 
-  do echo "Copying ${f} to ${EMACSDIR}/${f}";
-  cp -pf ${f} $EMACSDIR/${f};
+  do echo "Symlinkg ${f} to ${EMACSDIR}/${f}";
+  ln -sf $(readlink -f ${f}) $EMACSDIR/${f};
 done

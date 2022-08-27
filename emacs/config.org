@@ -51,8 +51,8 @@ To install the new configuration, simply execute ./install.sh.
     mkdir ${EMACSDIR}
   fi
   for f in init.el config.org; 
-    do echo "Copying ${f} to ${EMACSDIR}/${f}";
-    cp -pf ${f} $EMACSDIR/${f};
+    do echo "Symlinking ${f} to ${EMACSDIR}/${f}";
+    ln -sf $(readlink -f ${f}) $EMACSDIR/${f};
   done
 #+END_SRC
 ** Windows
