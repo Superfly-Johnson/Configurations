@@ -145,12 +145,6 @@ EVIL collection is a collection of contributed packages that evil-ify various em
 #+BEGIN_SRC emacs-lisp
 (electric-pair-mode 1)
 #+END_SRC
-** Tabulation
-#+begin_src emacs-lisp
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-(setq indent-line-function 'insert-tab)
-#+end_src
 ** Hooks
 *** Javascript-mode hook
 This sets the javascript tab size to 2 within javascript-mode.
