@@ -1,0 +1,3 @@
+[submodule "NixOS"]
+	path = NixOS
+	url = git@github.com:Superfly-Johnson/configuration.nix.git
