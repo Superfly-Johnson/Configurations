@@ -18,6 +18,7 @@
         pkgs.ardour
         pkgs.freecad
         pkgs.keepassxc
+        pkgs.konversation
     ];
 
     services.syncthing.enable = true;
