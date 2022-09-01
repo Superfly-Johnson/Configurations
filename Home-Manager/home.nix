@@ -19,6 +19,7 @@
         pkgs.freecad
         pkgs.keepassxc
         pkgs.konversation
+        pkgs.nvi
     ];
 
     services.syncthing.enable = true;
